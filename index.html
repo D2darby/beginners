@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginners — 김가족 기록</title>
+<meta name="description" content="처음의 마음으로, 계속. 김가족의 사진 아카이브.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --paper:#FBFAF7; --ink:#17150F; --graphite:#6B6759;
+  --hairline:#E9E6DD; --pine:#1F3D2B;
+  --serif:'Cormorant Garamond', 'Noto Serif KR', serif;
+  --sans:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── header ── */
+header{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+.bar{max-width:1360px;margin:0 auto;padding:14px 24px;display:flex;
+  align-items:baseline;justify-content:space-between;gap:16px}
+.mark{font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:.14em;
+  text-decoration:none;color:var(--ink)}
+nav{display:flex;gap:4px}
+.tab{appearance:none;border:0;background:none;font:inherit;font-size:13px;
+  letter-spacing:.12em;color:var(--graphite);padding:6px 12px;cursor:pointer;
+  border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--pine);border-bottom-color:var(--pine)}
+.tab:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+
+/* ── hero ── */
+.hero{max-width:1360px;margin:0 auto;padding:96px 24px 72px;text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.34em;color:var(--graphite);margin-bottom:22px}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(56px,9vw,116px);
+  letter-spacing:.06em;line-height:1.02}
+h1 span{display:inline-block;opacity:0;transform:translateY(10px);
+  animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero .dates{margin-top:26px;font-family:var(--serif);font-size:17px;
+  letter-spacing:.22em;color:var(--graphite)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ── rooms & wall text ── */
+main{max-width:1360px;margin:0 auto;padding:0 24px 140px}
+.room{padding-top:34px}
+.room + .room{margin-top:96px}
+.wall{display:flex;align-items:baseline;gap:20px;border-bottom:1px solid var(--hairline);
+  padding-bottom:14px;margin-bottom:44px}
+.wall h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,72px);
+  letter-spacing:.08em;color:var(--ink)}
+.wall .count{font-size:12px;letter-spacing:.2em;color:var(--graphite)}
+
+/* ── masonry ── */
+.grid{columns:3 340px;column-gap:36px}
+figure.piece{break-inside:avoid;margin:0 0 52px;opacity:0;transform:translateY(14px);
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.piece button{display:block;width:100%;border:1px solid var(--hairline);background:#fff;
+  padding:0;cursor:zoom-in;transition:border-color .25s}
+.piece button:hover{border-color:#C9C4B4}
+.piece button:focus-visible{outline:2px solid var(--pine);outline-offset:3px}
+.piece img{display:block;width:100%;height:auto}
+figcaption{padding-top:12px;display:flex;flex-direction:column;gap:2px}
+.cap-title{font-size:13.5px;font-weight:500;letter-spacing:.02em}
+.cap-meta{font-size:12px;letter-spacing:.06em;color:var(--graphite)}
+.cap-meta .place{color:var(--pine)}
+.empty{padding:120px 0;text-align:center;color:var(--graphite);
+  font-family:var(--serif);font-size:20px;letter-spacing:.1em}
+
+/* ── lightbox ── */
+dialog#lb{border:0;padding:0;width:100vw;height:100dvh;max-width:none;max-height:none;
+  background:rgba(251,250,247,.985)}
+dialog#lb::backdrop{background:transparent}
+.lb-stage{width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;padding:56px 20px 34px;position:relative}
+.lb-stage img{max-width:min(1200px,92vw);max-height:74dvh;background:#fff;
+  border:1px solid var(--hairline);padding:10px}
+.placard{text-align:center}
+.placard .cap-title{font-size:15px}
+.lb-x,.lb-prev,.lb-next{position:absolute;appearance:none;border:0;background:none;
+  cursor:pointer;color:var(--ink);font-family:var(--serif)}
+.lb-x{top:18px;right:22px;font-size:34px;line-height:1}
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:46px;padding:12px}
+.lb-prev{left:10px}.lb-next{right:10px}
+.lb-x:hover,.lb-prev:hover,.lb-next:hover{color:var(--pine)}
+.lb-x:focus-visible,.lb-prev:focus-visible,.lb-next:focus-visible{outline:2px solid var(--pine)}
+
+/* ── footer ── */
+footer{border-top:1px solid var(--hairline);padding:34px 24px 60px;text-align:center;
+  font-size:12px;letter-spacing:.2em;color:var(--graphite)}
+footer .leaf{font-family:var(--serif);font-size:15px;letter-spacing:.16em;color:var(--ink)}
+
+@media (max-width:640px){
+  .hero{padding:64px 20px 48px}
+  .grid{column-gap:22px}
+  figure.piece{margin-bottom:36px}
+  .bar{padding:12px 16px}
+  .tab{padding:6px 8px;letter-spacing:.08em}
+}
+@media (prefers-reduced-motion:reduce){
+  h1 span,figure.piece{animation:none;opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="mark" href="#latest" data-view="latest">BEGINNERS</a>
+    <nav role="tablist" aria-label="보기 방식">
+      <button class="tab" role="tab" data-view="latest">최신</button>
+      <button class="tab" role="tab" data-view="year">연도별</button>
+      <button class="tab" role="tab" data-view="place">장소별</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="소개">
+  <p class="eyebrow">김가족 기록 · FAMILY ARCHIVE</p>
+  <h1 id="title" aria-label="Beginners"></h1>
+  <p class="dates" id="range">—</p>
+</section>
+
+<main id="rooms" aria-live="polite"></main>
+
+<dialog id="lb" aria-label="사진 크게 보기">
+  <div class="lb-stage">
+    <button class="lb-x" aria-label="닫기">×</button>
+    <button class="lb-prev" aria-label="이전 사진">‹</button>
+    <img id="lb-img" src="" alt="">
+    <div class="placard">
+      <div class="cap-title" id="lb-title"></div>
+      <div class="cap-meta" id="lb-meta"></div>
+    </div>
+    <button class="lb-next" aria-label="다음 사진">›</button>
+  </div>
+</dialog>
+
+<footer>
+  <div class="leaf">🌱 Beginners</div>
+  <div style="margin-top:8px">처음의 마음으로, 계속 · SINCE 2014</div>
+</footer>
+
+<script>
+(async function(){
+  /* 워드마크 글자 등장 */
+  const word="Beginners", h1=document.getElementById('title');
+  [...word].forEach((ch,i)=>{const s=document.createElement('span');
+    s.textContent=ch;s.style.animationDelay=(80*i)+'ms';h1.appendChild(s);});
+
+  let photos=[];
+  try{
+    const r=await fetch('photos.json?v='+Date.now());
+    photos=await r.json();
+  }catch(e){}
+  photos=(photos||[]).filter(p=>p&&p.image);
+  photos.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+
+  /* 기간 표기 */
+  const yrs=[...new Set(photos.map(p=>p.year).filter(Boolean))].sort();
+  document.getElementById('range').textContent=
+    yrs.length?(yrs[0]===yrs[yrs.length-1]?yrs[0]:yrs[0]+' — '+yrs[yrs.length-1]):'—';
+
+  const rooms=document.getElementById('rooms');
+  const fmt=d=>{if(!d)return'';const[y,m,dd]=d.split('-');return`${y}. ${+m}. ${+dd}`;};
+  const grid=list=>{
+    const g=document.createElement('div');g.className='grid';
+    list.forEach((p,i)=>{
+      const f=document.createElement('figure');f.className='piece';
+      f.style.animationDelay=(Math.min(i,10)*60)+'ms';
+      const idx=photos.indexOf(p);
+      f.innerHTML=`<button data-i="${idx}">
+        <img loading="lazy" src="${p.image}=w900" alt="${p.title||''}"></button>
+        <figcaption><span class="cap-title">${p.title||''}</span>
+        <span class="cap-meta">${fmt(p.date)}${p.place?` · <span class="place">${p.place}</span>`:''}</span>
+        </figcaption>`;
+      g.appendChild(f);
+    });
+    return g;
+  };
+  const room=(label,list,count)=>{
+    const s=document.createElement('section');s.className='room';
+    if(label!==null){
+      s.innerHTML=`<div class="wall"><h2>${label}</h2>
+        <span class="count">${count}점</span></div>`;
+    }
+    s.appendChild(grid(list));return s;
+  };
+
+  function render(view){
+    rooms.innerHTML='';
+    document.querySelectorAll('.tab').forEach(t=>
+      t.setAttribute('aria-selected',t.dataset.view===view));
+    if(!photos.length){
+      rooms.innerHTML='<p class="empty">아직 걸린 사진이 없습니다</p>';return;
+    }
+    if(view==='latest'){rooms.appendChild(room(null,photos,photos.length));}
+    if(view==='year'){
+      const ys=[...new Set(photos.map(p=>p.year||'미분류'))]
+        .sort((a,b)=>b.localeCompare(a));
+      ys.forEach(y=>{const l=photos.filter(p=>(p.year||'미분류')===y);
+        rooms.appendChild(room(y,l,l.length));});
+    }
+    if(view==='place'){
+      const ps=[...new Set(photos.map(p=>p.place||'미분류'))]
+        .sort((a,b)=>a==='미분류'?1:b==='미분류'?-1:a.localeCompare(b,'ko'));
+      ps.forEach(pl=>{const l=photos.filter(p=>(p.place||'미분류')===pl);
+        rooms.appendChild(room(pl,l,l.length));});
+    }
+    location.hash=view;
+  }
+
+  document.querySelectorAll('[data-view]').forEach(el=>
+    el.addEventListener('click',e=>{e.preventDefault();render(el.dataset.view);}));
+  render(['latest','year','place'].includes(location.hash.slice(1))?
+    location.hash.slice(1):'latest');
+
+  /* 라이트박스 */
+  const lb=document.getElementById('lb'),im=document.getElementById('lb-img'),
+    ti=document.getElementById('lb-title'),me=document.getElementById('lb-meta');
+  let cur=0;
+  const show=i=>{cur=(i+photos.length)%photos.length;const p=photos[cur];
+    im.src=p.image+'=w2000';im.alt=p.title||'';ti.textContent=p.title||'';
+    me.innerHTML=`${fmt(p.date)}${p.place?` · <span class="place">${p.place}</span>`:''}`;};
+  rooms.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-i]');if(!b)return;
+    show(+b.dataset.i);lb.showModal();});
+  lb.querySelector('.lb-x').onclick=()=>lb.close();
+  lb.querySelector('.lb-prev').onclick=()=>show(cur-1);
+  lb.querySelector('.lb-next').onclick=()=>show(cur+1);
+  lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
+  addEventListener('keydown',e=>{if(!lb.open)return;
+    if(e.key==='ArrowLeft')show(cur-1);
+    if(e.key==='ArrowRight')show(cur+1);});
+})();
+</script>
+</body>
+</html>
